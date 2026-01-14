@@ -1,3 +1,3 @@
 package com.example.demo.mongodemo.exception
 
-class IllegalArgumentException(message: String) : RuntimeException(message)
+class InvalidBulkRequestException(message: String) : RuntimeException(message)

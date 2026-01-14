@@ -3,6 +3,7 @@ package com.example.demo.mongodemo.repository
 import com.example.demo.mongodemo.dto.UserResponse
 import com.example.demo.mongodemo.model.User
 import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.mongodb.core.bulkOps
 
 interface UserRepository : MongoRepository<User, String>{
 

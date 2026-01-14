@@ -1,17 +1,21 @@
 package com.example.demo.mongodemo.controller
 
+import com.example.demo.mongodemo.dto.BulkUserUpdateRequest
 import com.example.demo.mongodemo.dto.CreateUserRequest
 import com.example.demo.mongodemo.dto.UserResponse
 import com.example.demo.mongodemo.model.User
 import com.example.demo.mongodemo.repository.UserRepository
+import com.example.demo.mongodemo.service.UserBulkService
 import com.example.demo.mongodemo.service.UserService
 import org.springframework.web.bind.annotation.*
 import jakarta.validation.*
+import org.springframework.data.mongodb.core.BulkOperations
 
 @RestController
 @RequestMapping("/users")
 class UserController(
-    private val userService: UserService
+    private val userService: UserService,
+    private val userBulkService: UserBulkService
 ) {
 
     @PostMapping
@@ -19,6 +23,10 @@ class UserController(
         return userService.createUser(request)
     }
 
+    @PostMapping("/bulk-update")
+    fun bulkUpdateUsers(@RequestBody requests: List<BulkUserUpdateRequest>){
+        return userBulkService.bulkUpdateUsers(requests)
+    }
 
     @GetMapping
     fun getAllUsers(): List<UserResponse> {
@@ -49,5 +57,7 @@ class UserController(
     fun getUserById(@PathVariable id: String): UserResponse {
         return userService.getUserById(id)
     }
+
+
 
 }
